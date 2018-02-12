@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/10 13:26:23 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/14 17:10:20 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+void	ft_putstr_fd(char const *s, int fd)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	int i;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}

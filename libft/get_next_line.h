@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/18 14:34:44 by vguerand          #+#    #+#             */
+/*   Updated: 2017/12/11 14:20:04 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#ifndef _GET_NEXT_LINE_H
+# define _GET_NEXT_LINE_H
 
-typedef struct s_tube
-{
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
 
+int					get_next_line(const int fd, char **line);
 
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+#endif

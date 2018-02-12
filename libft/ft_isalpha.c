@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/08 15:51:36 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/10 19:34:05 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "stdlib.h"
 
-typedef struct s_tube
+int		ft_isalpha(int c)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
-
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	if (c <= 'z' && c >= 'a')
+		return (1);
+	else if (c <= 'Z' && c >= 'A')
+		return (1);
+	return (0);
+}

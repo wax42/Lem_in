@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/10 13:41:52 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/12 12:52:50 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	const unsigned char		*str1;
+	const unsigned char		*str2;
+	size_t					i;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	i = 0;
+	if (s1 == s2 || n == 0)
+		return (0);
+	str1 = (const unsigned char *)s1;
+	str2 = (const unsigned char *)s2;
+	while (n-- != 0)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		if (n != 0)
+			i++;
+	}
+	return (0);
+}

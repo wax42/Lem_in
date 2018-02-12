@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/11 11:02:11 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/12 12:55:26 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	char	*pc;
+	size_t	i;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	pc = NULL;
+	i = 0;
+	pc = (char *)malloc(sizeof(*pc) * (len + 1));
+	if (pc != NULL && s != NULL)
+	{
+		while (i < len)
+		{
+			pc[i] = s[start];
+			start++;
+			i++;
+		}
+		pc[i] = '\0';
+	}
+	return (pc);
+}

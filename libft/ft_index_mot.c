@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_index_mot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/14 18:50:28 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/15 08:31:26 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+int		ft_index_mot(char *str, int mot, char separateur)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	int		i;
+	int		compteur_mots;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	i = 0;
+	compteur_mots = 0;
+	while (str[i])
+	{
+		while (str[i] == separateur)
+			i++;
+		if (compteur_mots == mot)
+			return (i);
+		while (str[i] != separateur && str[i])
+			i++;
+		compteur_mots++;
+	}
+	return (0);
+}

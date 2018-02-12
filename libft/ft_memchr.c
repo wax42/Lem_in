@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/10 13:42:05 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/14 17:56:31 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	unsigned char	*str;
+	unsigned char	c8;
+	size_t			i;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	str = (unsigned char *)s;
+	c8 = (unsigned char)c;
+	i = 0;
+	while (n--)
+	{
+		if (str[i] == c8)
+			return (str + i);
+		i++;
+	}
+	return (NULL);
+}

@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/12 23:33:24 by vguerand         ###   ########.fr       */
+/*   Created: 2017/11/09 11:15:08 by vguerand          #+#    #+#             */
+/*   Updated: 2017/11/10 19:26:07 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef "__LEM_IN_H__"
-# define __LEM_IN_H__
-# include "lem_in.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct s_tube
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	struct s_room *next;
-	struct s_tube *tube_next;
-}				t_tube;
+	size_t			i;
+	unsigned char	*dest;
+	unsigned char	*srcs;
 
-
-typedef struct s_room
-{
-	char 		*name;
-	int 		nbr_fourmi;
-	int 		nbr_tube;
-	struct s_room 	*next;
-	t_tub    	*tube;
-}				t_room;
-
-typedef struct s_param
-{
-	char *start;
-	char *end;
-	t_room *head;
-	size_t 	nbr_fourmi;
-}				t_param
+	i = 0;
+	dest = (unsigned char*)dst;
+	srcs = (unsigned char*)src;
+	while (i < n)
+	{
+		dest[i] = srcs[i];
+		if (srcs[i] == (unsigned char)c)
+		{
+			return (dest + i + 1);
+		}
+		i++;
+	}
+	return (NULL);
+}
