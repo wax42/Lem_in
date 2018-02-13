@@ -6,13 +6,13 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:40:50 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/13 04:16:54 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 05:54:31 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/lem_in.h"
 
-int			ft_check(char *str)
+int			ft_check_t(char *str)
 {
 	int i;
 	int count;
@@ -35,7 +35,7 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 	int i;
 
 	i = 0;
-	if (!ft_check(str))
+	if (!ft_check_t(str))
 		exit(0);
 	while (str[i])
 	{

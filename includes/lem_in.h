@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 05:20:23 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 06:17:32 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ typedef struct s_param
 
 void  	ft_exit(int keycode);
 
-int	ft_crea_room(char *line, t_param *p, int keycode);
+int 	ft_check_htag(char *line);
 
-int 	ft_check_htag(char *line, t_param *p);
+t_room	*ft_crea_room(t_param *p, int keycode, char *name);
+
+int 	ft_parse_room(char *line);
+
 
 int 	ft_crea_tube(char *str, t_param *p);
 

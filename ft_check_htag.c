@@ -6,16 +6,14 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:41:50 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 05:18:56 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 05:51:55 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/lem_in.h"
 
-int 	ft_check_htag(char *line, t_param *p)
+int 	ft_check_htag(char *line)
 {
-	int keycode;
-
 	if ((ft_strstr(line, "#")))
 			return (-1);
 	if (!(ft_strstr(line , "##")))
