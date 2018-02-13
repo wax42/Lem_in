@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 03:47:10 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 04:46:14 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int ft_parse_room(char *line)
 int	ft_crea_room(char *line, t_param *p, int keycode)
 {
 	t_room *room;
+	t_room *tmp;
 	t_room *new_room;
 	char *name;
 	int sub;
@@ -55,14 +56,13 @@ int	ft_crea_room(char *line, t_param *p, int keycode)
 	name = ft_strsub(line, 0, sub);
 	ft_putendl(name);
 	room = p->head;
-	while (room && room->next)
+	while (room)
 	{
 		ft_putstr("je rentre pas");
-		if ((ft_strequ(name, room->name)))
+		if (name && (ft_strequ(name, room->name)))
 			ft_exit(0);
 		room = room->next;
 	}
-	ft_putstr("pute");
 	if (!(new_room = (t_room*)malloc(sizeof(t_room))))
 		ft_exit(-1);
 	if (keycode == 0 || keycode == END)
@@ -74,8 +74,8 @@ int	ft_crea_room(char *line, t_param *p, int keycode)
 	new_room->next = NULL;
 	if (!(new_room->tube = (t_tube*)malloc(sizeof(t_tube))))
 		ft_exit(-1);
+	ft_putstr("pute");
 	room->next = new_room;
-	p->head->next = room;
-	sleep(4);
+	room->head = tmp;
 	return (1);
 }

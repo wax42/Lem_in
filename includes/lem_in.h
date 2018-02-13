@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 03:26:39 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 05:20:23 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define __LEM_IN_H
 # include "../libft/libft.h"
 # define START 1
-# define END 0
+# define END 2
 
 typedef struct s_tube
 {
