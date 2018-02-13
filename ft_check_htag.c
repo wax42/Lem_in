@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:41:50 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:49:28 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 03:00:33 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int 	ft_check_htag(char *line, t_param *p)
 {
 	int keycode;
 
-	if (ft_strstr(line , "#"))
+	if ((ft_strstr(line, "#")))
 	{
-		ft_strdel(&line);
-		return (1);
+		if (!(ft_strstr(line , "##")))
+			return (1);
 	}
-	 if (!(ft_strstr(line, "##")))
-	 	ft_exit(0);
+	if (!(ft_strstr(line , "##")))
+		return (0);
 	if ((ft_strstr(line, "start")))
 		keycode = START;
 	if ((ft_strstr(line, "end")))

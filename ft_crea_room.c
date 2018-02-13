@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:51:53 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 03:47:10 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_parse_room(char *line)
 
 	i = 0;
 	tmp = i;
-	while (ft_isalnum(line[i]) && line[i] != 'L')
+	while (line[i] != 'L' && ft_isalnum(line[i]))
 		i++;
 	sub = i;
 	if (tmp == i)
@@ -53,13 +53,16 @@ int	ft_crea_room(char *line, t_param *p, int keycode)
 	if (!(sub = ft_parse_room(line)))
 		return (0);
 	name = ft_strsub(line, 0, sub);
-	room = p->head->next;
-	while (room)
+	ft_putendl(name);
+	room = p->head;
+	while (room && room->next)
 	{
-		if (!(ft_strequ(name, room->name)))
+		ft_putstr("je rentre pas");
+		if ((ft_strequ(name, room->name)))
 			ft_exit(0);
 		room = room->next;
 	}
+	ft_putstr("pute");
 	if (!(new_room = (t_room*)malloc(sizeof(t_room))))
 		ft_exit(-1);
 	if (keycode == 0 || keycode == END)
@@ -71,7 +74,8 @@ int	ft_crea_room(char *line, t_param *p, int keycode)
 	new_room->next = NULL;
 	if (!(new_room->tube = (t_tube*)malloc(sizeof(t_tube))))
 		ft_exit(-1);
-	new_room->next = NULL;
 	room->next = new_room;
+	p->head->next = room;
+	sleep(4);
 	return (1);
 }

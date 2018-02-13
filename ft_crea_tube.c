@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:40:50 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/13 01:54:28 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 03:40:38 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			ft_check(char *str)
 	return (count == 1) ? 1 : 0;
 }
 
-void		ft_check_tube(char *str, t_param *p, char **room1, char **room2)
+void		ft_check_tube(char *str, char **room1, char **room2)
 {
 	int i;
 
@@ -52,11 +52,12 @@ void		ft_check_tube(char *str, t_param *p, char **room1, char **room2)
 		exit (0);
 }
 
-t_room		*ft_get_room(room, t_param *p)
+t_room		*ft_get_room(char *room, t_param *p)
 {
 	t_room	*myroom;
-	myroom = p->head;
-	while (!ft_strequ(myroom, room1) || myroom->next != NULL)
+
+	myroom = p->head->next;
+	while (!ft_strequ(myroom->name, room) || myroom->next != NULL)
 		myroom = myroom->next;
 	return (myroom);
 }
@@ -70,10 +71,12 @@ int 	ft_crea_tube(char *str, t_param *p)
 	t_room	*room_2;
 	t_tube	*tube;
 
-	ft_check_tube(str, p, &room1, &room2);
+	ft_putendl(str);
+	ft_check_tube(str, &room1, &room2);
 	room_1 = ft_get_room(room1, p);
+	ft_putendl("yes");
 	room_2 = ft_get_room(room2, p);
-	tube = room1->tube->tube_next;
+	tube = room_1->tube->tube_next;
 	while (tube)
 		tube  = tube->tube_next;
 
