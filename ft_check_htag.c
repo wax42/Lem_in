@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_check_htag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 23:32:19 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:23:23 by vguerand         ###   ########.fr       */
+/*   Created: 2018/02/12 23:41:50 by vguerand          #+#    #+#             */
+/*   Updated: 2018/02/13 01:46:49 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "./includes/lem_in.h"
 
-int main(void)
+int 	ft_check_htag(char *line, t_param *p)
 {
-	t_param p;
-	char *line;
+	int keycode;
 
-	if (!(p.head = (t_room*)malloc(sizeof(t_room))))
-		ft_exit(-1);
-	p.head->next = NULL;
-	while (get_next_line(0, &line))
+	if (ft_strstr(line , "#"))
 	{
-		if ((ft_check_htag(line, &p) || ft_crea_room(line, &p, 0) ))//|| ft_crea_tub(line, &p)))
-			ft_strdel(&line);
-		else
-			ft_putstr("eroor ? ");
+		ft_strdel(&line);
+		return (1);
 	}
+	 if (!(ft_strstr(line, "##")))
+	 	ft_exit(0);
+	if ((ft_strstr(line, "start")))
+		keycode = START;
+	if ((ft_strstr(line, "end")))
+		keycode = END;
+	ft_strdel(&line);
+	get_next_line(0, &line);
+	ft_crea_room(line, p, keycode);
+	return (1);
 }
