@@ -6,7 +6,7 @@
 #    By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/13 01:08:15 by vguerand          #+#    #+#              #
-#    Updated: 2018/02/13 01:46:07 by vguerand         ###   ########.fr        #
+#    Updated: 2018/02/13 01:53:48 by vguerand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 HEAD = ./includes/lem_in.h
 
-SRC =  ft_crea_room.c main.c ft_exit.c ft_check_htag.c
+SRC =  ft_crea_room.c main.c ft_exit.c ft_check_htag.c ft_crea_tube.c
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))
 

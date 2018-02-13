@@ -6,11 +6,12 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:03:14 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:16:41 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 01:49:28 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "./includes/lem_in.h"
+
 
 void  	ft_exit(int keycode)
 {

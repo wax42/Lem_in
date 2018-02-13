@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:21:40 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 01:54:11 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void  	ft_exit(int keycode);
 int	ft_crea_room(char *line, t_param *p, int keycode);
 
 int 	ft_check_htag(char *line, t_param *p);
+
+int 	ft_crea_tube(char *str, t_param *p);
 
 #endif

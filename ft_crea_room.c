@@ -6,11 +6,12 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 01:20:59 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/13 01:51:53 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "./includes/lem_in.h"
+
 
 int ft_parse_room(char *line)
 {
@@ -67,6 +68,9 @@ int	ft_crea_room(char *line, t_param *p, int keycode)
 		new_room->nbr_fourmi = p->nbr_fourmi;
 	new_room->type_of_room = keycode;
 	new_room->name = name;
+	new_room->next = NULL;
+	if (!(new_room->tube = (t_tube*)malloc(sizeof(t_tube))))
+		ft_exit(-1);
 	new_room->next = NULL;
 	room->next = new_room;
 	return (1);
