@@ -1,4 +1,5 @@
 3
+##start
 0 2 2
 salle1 4 6
 salle2 6 1
@@ -8,3 +9,4 @@ salle3 6 4
 0-salle2
 0-salle3
 0-5ok
+5ok-salle1

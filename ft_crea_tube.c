@@ -6,11 +6,20 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:40:50 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/14 10:23:36 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/14 15:22:25 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/lem_in.h"
+
+t_tube		*ft_add_tube(t_tube *head, t_room *target)
+{
+	t_tube	*tmp;
+
+	tmp = ft_new_tube(target);
+	tmp->tube_next = head;
+	return (tmp);
+}
 
 int			ft_check_t(char *str)
 {
@@ -74,7 +83,6 @@ t_tube		*ft_new_tube(t_room *room)
 	t_tube  *new;
 
 	new = (t_tube*)malloc(sizeof(t_tube));
-	new->tube_next = NULL;
 	new->next = room;
 	return (new);
 }
@@ -90,14 +98,5 @@ t_room		*ft_crea_tube(char *str, t_room *room, t_room **target)
 	room_1 = ft_get_room(room1, room);
 	room_2 = ft_get_room(room2, room);
 	*target = room_2;
-	/*
-	if (room_1->tube->next == NULL)
-	{
-		room_1->tube->tube_next = NULL;
-		room_1->tube->next = room_2;
-	}
-	else
-		ft_putstr("OK");
-*/
-		return (room_1);
+	return (room_1);
 }

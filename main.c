@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:32:19 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/14 12:13:07 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/14 15:24:22 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_room 		*ft_check(char *line, t_param *p, t_room *head)
 	char *name;
 	t_room *room;
 	t_room *target;
-	t_tube	*tmp;
 
 	room = head;
 	if ((keycode = ft_check_htag(line) > 0))
@@ -44,23 +43,18 @@ t_room 		*ft_check(char *line, t_param *p, t_room *head)
 		{
 			ft_putstr("FIRST ELEM\n");
 			ft_putendl(target->name);
-			room->tube = (t_tube*)malloc(sizeof(t_tube));
-			room->tube->next = target;
-			//ft_putstr(target->name);
+			room->tube = ft_new_tube(target);
 			room->tube->tube_next = NULL;
 		}
 		else
+			room->tube = ft_add_tube(room->tube, target);
+		if (target->tube == NULL)
 		{
-			tmp = room->tube;
-			while (tmp)
-			{
-				ft_putendl(room->name);
-				tmp = tmp->tube_next;
-			}
-			tmp = ft_new_tube(target);
-			ft_putstr(tmp->next->name);
-			ft_putstr("PUTE\n");
+			target->tube = ft_new_tube(room);
+			target->tube->tube_next = NULL;
 		}
+		else
+			target->tube = ft_add_tube(target->tube, room);
 	}
 	return (head);
 }
@@ -87,22 +81,21 @@ void		ft_display_tube(t_tube *tube)
 {
 	while (tube)
 	{
-
-		ft_putstr(tube->next->name);
 		ft_putstr("->");
+		ft_putstr(tube->next->name);
 		tube = tube->tube_next;
 	}
 }
 
 void		ft_display_room(t_room *room)
 {
-	//while (room)
-//	{
+	while (room)
+	{
 		ft_putstr(room->name);
-		ft_putstr(" : ");
 		ft_display_tube(room->tube);
+		ft_putendl("");
 		room = room->next;
-//	}
+	}
 }
 
 int main(void)

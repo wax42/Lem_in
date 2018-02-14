@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 06:17:32 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:19:37 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ t_room	*ft_crea_room(t_param *p, int keycode, char *name);
 
 int 	ft_parse_room(char *line);
 
+t_room		*ft_crea_tube(char *str, t_room *room, t_room **target);
 
-int 	ft_crea_tube(char *str, t_param *p);
+t_tube		*ft_new_tube(t_room *room);
+
+t_tube		*ft_add_tube(t_tube *head, t_room *target);
 
 #endif
