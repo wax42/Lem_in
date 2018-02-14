@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:41:50 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/14 15:27:56 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:33:59 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 int 	ft_check_htag(char *line)
 {
-
-	if (!(ft_strstr(line , "##")))
-		return (0);
-	else if ((ft_strstr(line, "#")))
-		return (-1);
-	if ((ft_strstr(line, "start")))
+	if ((ft_strequ(line, "##start")))
 		return (START);
-	if ((ft_strstr(line, "end")))
+	else if ((ft_strequ(line, "##end")))
 		return (END);
-	return (1);
+	else if (line[0] == '#')
+		return (3);
+	return (0);
 }

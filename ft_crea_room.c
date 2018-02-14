@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/14 11:18:51 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/14 15:37:57 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int ft_parse_room(char *line)
 		i++;
 	if (tmp == i)
 		return (0);
-
 	return ((sub > 0) ? sub : -1);
 }
 

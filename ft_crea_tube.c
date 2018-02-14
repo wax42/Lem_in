@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:40:50 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/14 15:22:25 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:18:14 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			ft_check_t(char *str)
 		if (str[i] == '-')
 			count++;
 		else if (!ft_isalnum(str[i]))
-			exit (0);
+			ft_exit(0);
 		i++;
 	}
 	return (count == 1) ? 1 : 0;
@@ -46,11 +46,11 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 	i = 0;
 
 	if (!ft_check_t(str))
-		exit(0);
+		ft_exit(0);
 	while (str[i])
 	{
 		if (str[0] == '-')
-			exit(0);
+			ft_exit(0);
 		if (str[i] == '-')
 		{
 			*room1 = ft_strsub(str, 0, i);
@@ -59,7 +59,7 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 		i++;
 	}
 	if (!ft_strlen(*room2))
-		exit (0);
+		ft_exit(0);
 }
 
 t_room		*ft_get_room(char *room, t_room *head)
