@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:40:50 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/13 05:54:31 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/14 10:23:36 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 	int i;
 
 	i = 0;
+
 	if (!ft_check_t(str))
 		exit(0);
 	while (str[i])
@@ -52,35 +53,51 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 		exit (0);
 }
 
-t_room		*ft_get_room(char *room, t_param *p)
+t_room		*ft_get_room(char *room, t_room *head)
 {
 	t_room	*myroom;
 
-	myroom = p->head->next;
-	while (!ft_strequ(myroom->name, room) || myroom->next != NULL)
-		myroom = myroom->next;
+	myroom = head->next;
+	while (myroom->next)
+	{
+		if (ft_strequ(myroom->name, room))
+			return (myroom);
+		else
+			myroom = myroom->next;
+	}
 	return (myroom);
 }
 
 
-int 	ft_crea_tube(char *str, t_param *p)
+t_tube		*ft_new_tube(t_room *room)
+{
+	t_tube  *new;
+
+	new = (t_tube*)malloc(sizeof(t_tube));
+	new->tube_next = NULL;
+	new->next = room;
+	return (new);
+}
+
+t_room		*ft_crea_tube(char *str, t_room *room, t_room **target)
 {
 	char	*room1;
 	char	*room2;
 	t_room	*room_1;
 	t_room	*room_2;
-	t_tube	*tube;
 
-	ft_putendl(str);
 	ft_check_tube(str, &room1, &room2);
-	room_1 = ft_get_room(room1, p);
-	ft_putendl("yes");
-	room_2 = ft_get_room(room2, p);
-	tube = room_1->tube->tube_next;
-	while (tube)
-		tube  = tube->tube_next;
-
-	tube = (t_tube*)malloc(sizeof(t_tube));
-	tube->next = room_2;
-	return (1);
+	room_1 = ft_get_room(room1, room);
+	room_2 = ft_get_room(room2, room);
+	*target = room_2;
+	/*
+	if (room_1->tube->next == NULL)
+	{
+		room_1->tube->tube_next = NULL;
+		room_1->tube->next = room_2;
+	}
+	else
+		ft_putstr("OK");
+*/
+		return (room_1);
 }

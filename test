@@ -1,10 +1,10 @@
 3
-##start
-0 1 0
-##end
-1 5 0
-2 9 0
-3 13 0
-0-2
-2-3
-3-1
+0 2 2
+salle1 4 6
+salle2 6 1
+salle3 6 4
+5ok 6 9
+0-salle1
+0-salle2
+0-salle3
+0-5ok

@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/13 06:28:36 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/14 11:18:51 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ t_room	*ft_crea_room(t_param *p, int keycode, char *name)
 		new_room->nbr_fourmi = p->nbr_fourmi;
 	new_room->type_of_room = keycode;
 	new_room->name = ft_strdup(name);
-	ft_putstr("oui");
 	new_room->next = NULL;
-	if (!(new_room->tube = (t_tube*)malloc(sizeof(t_tube))))
-		ft_exit(-1);
+	new_room->tube = NULL;
 	return (new_room);
 }
