@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/14 15:37:57 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:11:13 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_room	*ft_crea_room(t_param *p, int keycode, char *name)
 	new_room->type_of_room = keycode;
 	new_room->name = ft_strdup(name);
 	new_room->next = NULL;
+	new_room->path = 0;
 	new_room->tube = NULL;
 	return (new_room);
 }

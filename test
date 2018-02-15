@@ -1,14 +1,8 @@
 3
 ##start
-0        2          2
-# maman la pute
-salle1 4 6
-salle2 6 				1
-salle3 6 4
+salle1 0 0
+salle2 0 0
 ##end
-5ok 6 9
-0-salle1
-0-salle2
-0-salle3
-0-5ok
-5ok-salle1
+salle3 0 0
+salle1-salle2
+salle2-salle3

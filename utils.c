@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarthe <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 08:51:29 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/15 08:51:30 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/15 17:00:46 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		ft_display_tube(t_tube *tube)
 {
 	while (tube)
 	{
-		ft_putstr("->");
 		ft_putstr(tube->next->name);
+		ft_putstr("->");
 		tube = tube->tube_next;
 	}
 }
@@ -27,6 +27,9 @@ void		ft_display_room(t_room *room)
 	while (room)
 	{
 		ft_putstr(room->name);
+		ft_putstr("\tROOM PATH ");
+		ft_putnbr(room->path);
+		ft_putchar('\t');
 		ft_display_tube(room->tube);
 		ft_putendl("");
 		room = room->next;

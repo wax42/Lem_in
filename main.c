@@ -6,15 +6,14 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:32:19 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/15 10:45:53 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/15 16:42:44 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/lem_in.h"
 
-void	ft_tube_link(char *line, t_room *room, t_room *target)
+void	ft_tube_link(t_room *room, t_room *target)
 {
-	ft_putendl(line);
 	if (room->tube == NULL)
 	{
 		room->tube = ft_new_tube(target);
@@ -35,7 +34,7 @@ void	ft_room_link(char *line, t_room *room, int sub, t_param *p, int keycode)
 {
 	char	*name;
 
-	ft_putendl(line);
+	//ft_putendl(line);
 	name = ft_strsub(line, 0, sub);
 	while (room->next)
 	{
@@ -59,11 +58,12 @@ t_room	*ft_check(char **line, t_param *p, t_room *head)
 	{
 		ft_strdel(line);
 		get_next_line(0, line);
+		ft_putendl(*line);
 	}
 	if ((sub = ft_parse_room(*line)))
 		ft_room_link(*line, room, sub, p, keycode);
 	else if ((keycode != 3) && (room = ft_crea_tube(*line, head, &target)))
-		ft_tube_link(*line, room, target);
+		ft_tube_link(room, target);
 	else
 		ft_putendl(*line);
 	return (head);
@@ -113,6 +113,6 @@ int	main(void)
 	if (!p.nbr_fourmi)
 		ft_exit(0);
 	p.head = ft_read(&p);
-	ft_display_room(p.head->next);
+	resolution(&p);
 	return (0);
 }
