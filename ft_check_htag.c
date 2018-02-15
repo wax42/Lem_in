@@ -12,7 +12,7 @@
 
 #include "./includes/lem_in.h"
 
-int 	ft_check_htag(char *line)
+int		ft_check_htag(char *line)
 {
 	if ((ft_strequ(line, "##start")))
 		return (START);

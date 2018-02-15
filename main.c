@@ -6,19 +6,52 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:32:19 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/14 19:06:15 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:45:53 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/lem_in.h"
 
-t_room 		*ft_check(char **line, t_param *p, t_room *head)
+void	ft_tube_link(char *line, t_room *room, t_room *target)
 {
-	int keycode;
-	int sub;
-	char *name;
-	t_room *room;
-	t_room *target;
+	ft_putendl(line);
+	if (room->tube == NULL)
+	{
+		room->tube = ft_new_tube(target);
+		room->tube->tube_next = NULL;
+	}
+	else
+		room->tube = ft_add_tube(room->tube, target);
+	if (target->tube == NULL)
+	{
+		target->tube = ft_new_tube(room);
+		target->tube->tube_next = NULL;
+	}
+	else
+		target->tube = ft_add_tube(target->tube, room);
+}
+
+void	ft_room_link(char *line, t_room *room, int sub, t_param *p, int keycode)
+{
+	char	*name;
+
+	ft_putendl(line);
+	name = ft_strsub(line, 0, sub);
+	while (room->next)
+	{
+		if (ft_strequ(name, room->name))
+			ft_exit(0);
+		room = room->next;
+	}
+	room->next = ft_crea_room(p, keycode, name);
+}
+
+t_room	*ft_check(char **line, t_param *p, t_room *head)
+{
+	int		keycode;
+	int		sub;
+	t_room	*room;
+	t_room	*target;
 
 	room = head;
 	ft_putendl(*line);
@@ -28,44 +61,18 @@ t_room 		*ft_check(char **line, t_param *p, t_room *head)
 		get_next_line(0, line);
 	}
 	if ((sub = ft_parse_room(*line)))
-	{
-		ft_putendl(*line);
-		name = ft_strsub(*line, 0, sub);
-		while (room->next)
-		{
-			if (ft_strequ(name, room->name))
-				ft_exit(0);
-			room = room->next;
-		}
-		room->next = ft_crea_room(p, keycode, name);
-	}
+		ft_room_link(*line, room, sub, p, keycode);
 	else if ((keycode != 3) && (room = ft_crea_tube(*line, head, &target)))
-	{
-		ft_putendl(*line);
-		if (room->tube == NULL)
-		{
-			room->tube = ft_new_tube(target);
-			room->tube->tube_next = NULL;
-		}
-		else
-			room->tube = ft_add_tube(room->tube, target);
-		if (target->tube == NULL)
-		{
-			target->tube = ft_new_tube(room);
-			target->tube->tube_next = NULL;
-		}
-		else
-			target->tube = ft_add_tube(target->tube, room);
-	}
+		ft_tube_link(*line, room, target);
 	else
 		ft_putendl(*line);
 	return (head);
 }
 
-t_room 		*ft_read(t_param *p)
+t_room	*ft_read(t_param *p)
 {
-	t_room *head;
-	char *line;
+	t_room	*head;
+	char	*line;
 
 	if (!(head = (t_room*)malloc(sizeof(t_room))))
 		ft_exit(-1);
@@ -80,33 +87,12 @@ t_room 		*ft_read(t_param *p)
 	return (head);
 }
 
-void		ft_display_tube(t_tube *tube)
+int	main(void)
 {
-	while (tube)
-	{
-		ft_putstr("->");
-		ft_putstr(tube->next->name);
-		tube = tube->tube_next;
-	}
-}
-
-void		ft_display_room(t_room *room)
-{
-	while (room)
-	{
-		ft_putstr(room->name);
-		ft_display_tube(room->tube);
-		ft_putendl("");
-		room = room->next;
-	}
-}
-
-int main(void)
-{
-	t_param p;
-	char *line;
-	char *tmp;
-	char 	buf[1];
+	t_param	p;
+	char	*line;
+	char	*tmp;
+	char	buf[1];
 
 	line = ft_strnew(0);
 	while ((read(0, buf, 1)) > 0)

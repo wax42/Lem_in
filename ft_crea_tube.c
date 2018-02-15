@@ -12,15 +12,6 @@
 
 #include "./includes/lem_in.h"
 
-t_tube		*ft_add_tube(t_tube *head, t_room *target)
-{
-	t_tube	*tmp;
-
-	tmp = ft_new_tube(target);
-	tmp->tube_next = head;
-	return (tmp);
-}
-
 int			ft_check_t(char *str)
 {
 	int i;
@@ -44,7 +35,6 @@ void		ft_check_tube(char *str, char **room1, char **room2)
 	int i;
 
 	i = 0;
-
 	if (!ft_check_t(str))
 		ft_exit(0);
 	while (str[i])
@@ -75,16 +65,6 @@ t_room		*ft_get_room(char *room, t_room *head)
 			myroom = myroom->next;
 	}
 	return (myroom);
-}
-
-
-t_tube		*ft_new_tube(t_room *room)
-{
-	t_tube  *new;
-
-	new = (t_tube*)malloc(sizeof(t_tube));
-	new->next = room;
-	return (new);
 }
 
 t_room		*ft_crea_tube(char *str, t_room *room, t_room **target)

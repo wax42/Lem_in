@@ -12,8 +12,7 @@
 
 #include "./includes/lem_in.h"
 
-
-int ft_parse_room(char *line)
+int		ft_parse_room(char *line)
 {
 	int i;
 	int tmp;

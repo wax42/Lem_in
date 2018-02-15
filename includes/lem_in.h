@@ -42,6 +42,10 @@ typedef struct s_param
 
 void  	ft_exit(int keycode);
 
+void		ft_display_tube(t_tube *tube);
+
+void		ft_display_room(t_room *room);
+
 int 	ft_check_htag(char *line);
 
 t_room	*ft_crea_room(t_param *p, int keycode, char *name);
