@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:32:19 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/15 16:42:44 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/22 22:30:15 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_room	*ft_read(t_param *p)
 	if (!(head = (t_room*)malloc(sizeof(t_room))))
 		ft_exit(-1);
 	head->type_of_room = -1;
+	head->index = -1;
 	head->next = NULL;
 	head->name = NULL;
 	while (get_next_line(0, &line) > 0)

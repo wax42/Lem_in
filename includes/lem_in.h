@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/15 19:31:16 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/23 02:22:46 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct s_tube
 {
+	int			  n;
 	struct s_room *next;
 	struct s_tube *tube_next;
 }				t_tube;
@@ -25,10 +26,13 @@ typedef struct s_tube
 
 typedef struct s_room
 {
+	int			id;
 	int 		path;
 	int 		type_of_room;
 	char 		*name;
 	int 		nbr_fourmi;
+	int 		index;
+	int 		time;
 	int 		nbr_tube;
 	struct s_room 	*next;
 	t_tube    	*tube;
@@ -41,7 +45,6 @@ typedef struct s_param
 }				t_param;
 
 void    resolution(t_param *p);
-
 
 void  	ft_exit(int keycode);
 
