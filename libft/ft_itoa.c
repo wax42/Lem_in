@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vguerand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 15:15:50 by vguerand          #+#    #+#             */
-/*   Updated: 2017/11/14 10:03:24 by vguerand         ###   ########.fr       */
+/*   Created: 2018/02/26 16:17:20 by vguerand          #+#    #+#             */
+/*   Updated: 2018/02/26 16:17:39 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ char		*ft_itoa(int n)
 		neg = 1;
 	}
 	size = compteur_size(nbr);
-	if (!(str = ft_strnew(size)))
+	if (!(str = (char *)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	while (size--)
 	{
 		str[size] = remplissage(indice, nbr);
-		indice += 1;
+		indice++;
 	}
-	if (neg == 1)
-		str = ft_strjoin("-\0", str);
+	str[indice] = '\0';
 	return (str);
 }
