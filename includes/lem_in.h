@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/23 02:22:46 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/27 01:40:33 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_room
 	int			id;
 	int 		path;
 	int 		type_of_room;
+	int 		pa;
 	char 		*name;
 	int 		nbr_fourmi;
 	int 		index;
@@ -41,7 +42,7 @@ typedef struct s_room
 typedef struct s_param
 {
 	t_room *head;
-	size_t 	nbr_fourmi;
+	int 	nbr_fourmi;
 }				t_param;
 
 void    resolution(t_param *p);

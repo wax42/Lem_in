@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 08:51:29 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/23 02:32:09 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/27 01:05:04 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void		ft_display_room(t_room *room)
 		ft_putnbr(room->path);
 		ft_putstr("\tINDEX  ");
 		ft_putnbr(room->index);
+		ft_putchar('\t');
+		ft_putstr("\tPA  ");
+		ft_putnbr(room->pa);
 		ft_putchar('\t');
 		ft_display_tube(room->tube);
 		ft_putendl("");

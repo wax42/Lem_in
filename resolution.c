@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:17:41 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/23 02:37:00 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/27 02:07:06 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,13 @@
 #define FALSE -1
 #define TRUE 1
 
-
-
 int     secur_path(t_room *room, char *name)
 {
     t_tube *tmp;
     int tmp_int;
 
-    ft_putstr(room->name);
-    ft_putchar('\t');
-    ft_putnbr(room->path);
-    ft_putchar('\n');
-
     if (room->type_of_room == END || room->path == TRUE)
     {
-            ft_putendl("Emd");
             room->path = TRUE;
             return (TRUE);
     }
@@ -47,7 +39,7 @@ int     secur_path(t_room *room, char *name)
         {
             if (!ft_strequ(tmp->next->name, name))
             {
-                if ((tmp_int = secur_path(tmp->next, room->name)))
+                if ((tmp_int = secur_path(tmp->next, name)))
                 {
                     if (tmp_int == TRUE && !ft_strequ(room->name, name))
                     {
@@ -86,12 +78,16 @@ t_tube  *ft_calcul(t_tube *tube)
     int a;
     t_tube *adress;
 
-    a = -1;
+    a = tube->n;
     adress = NULL;
+    ft_putendl("calcul FCT");
     while (tube)
     {
-        if (a > tube->n && tube->next->path > 0 && !tube->next->nbr_fourmi)
+        if (a > tube->n && (tube->next->path == 1 || tube->next->type_of_room == END) && !tube->next->nbr_fourmi)
         {
+            ft_putendl("calkj");
+            ft_putstr(tube->next->name);
+            ft_putnbr(tube->next->nbr_fourmi);
             a = tube->n;
             adress = tube;
         }
@@ -109,41 +105,93 @@ void   ft_aff(int id, char *name)
     ft_putchar(' ');
 }
 
-int    ft_generation(t_room *room, int n)
+void  ft_noeud_init(t_room *room)
 {
-    t_tube *tmp;
+    t_tube *tube;
 
-    if (room->type_of_room == END)
-            return (n);
-    if (room->nbr_fourmi == 1)
-        n = n + 1;
-    tmp = room->tube;
-    while (tmp)
+    tube = room->tube;
+    while (tube)
     {
-        if (tmp->next->index >= room->index)
-            tmp->n = ft_generation(tmp->next, n + 1);
-        tmp = tmp->tube_next;
+        if (room->index > tube->next->index && tube->next->index != -1 && tube->next->nbr_fourmi)
+            room->pa++;
+        tube = tube->tube_next;
     }
-    if ((tmp = ft_calcul(room->tube)))
-    {
-        ft_aff(room->id, room->tube->next->name);
-        room->tube->next->id = room->id;
-        room->id = 0; // SECURITE
-        room->nbr_fourmi = 0;
-        tmp->next->nbr_fourmi++;
-    }
-    return (n);
 }
 
+int    ft_distance(t_room *room); //retourne la distance avec le PA
 
+int  ft_start(t_room *room, int id, int fourmi_rest)
+{
+    t_tube *tube;
+    int tmp_dist;
+    int old_dist;
+    t_room *tmp;
+
+    tube = room->tube;
+    tmp = room->tube->next;
+    tmp_dist = ft_distance(tmp);
+    while (tube->next)
+    {
+        if (room->index <= tube->next->index && !tube->next->nbr_fourmi)
+        {
+            old_dist = tmp_dist;
+            if ((tmp_dist = ft_distance(tube->next)) < old_dist)
+                tmp = tube->next;
+        }
+        tube = tube->tube_next;
+    }
+    if (fourmi_rest - tmp_dist > 0)
+    {
+        ft_aff(id, tmp->name);
+        tmp->id = id;
+        tmp->nbr_fourmi++;
+        //room->id = 0; // SECURITE
+        //room->nbr_fourmi = 0;
+    }
+    else
+        return (1);
+    return (0);
+}
+
+//
+// int    ft_generation(t_room *room, int n)
+// {
+//     t_tube *tmp;
+//
+//     ft_putnbr(n);
+//     ft_putstr("\t");
+//     ft_putstr(room->name);
+//     ft_noeud_init(room);
+//     if (room->type_of_room == END)
+//             return (n);
+//     if (room->nbr_fourmi == 1)
+//         n = n + 1;
+//     tmp = room->tube;
+//     while (tmp)
+//     {
+//         if (tmp->next->index >= room->index)
+//             n = ft_generation(tmp->next, n + 1);
+//         tmp->n = n;
+//         tmp = tmp->tube_next;
+//     }
+//     if ((tmp = ft_calcul(room->tube)) && room->nbr_fourmi == 1)
+//     {
+//         ft_aff(room->id, room->tube->next->name);
+//         tmp->next->id = room->id;
+//         room->id = 0; // SECURITE
+//         room->nbr_fourmi = 0;
+//         tmp->next->nbr_fourmi++;
+//     }
+//     return (n);
+// }
 
 void    resolution(t_param *p)
 {
     t_room   *room;
     t_room   *target;
-    size_t id = 1;
+    // t_tube   *tmp;
+    int id = 1;
 
-    //ft_display_room(p->head->next);
     room = p->head->next;
     target = room;
     while (room)
@@ -158,8 +206,8 @@ void    resolution(t_param *p)
             break ;
         target = target->next;
     }
-    ft_putendl(room->name);
-    ft_putnbr(room->nbr_fourmi);
+    //ft_putendl(room->name);
+    //ft_putnbr(room->nbr_fourmi);
     secur_path(room, room->name);
     if (room->path > 0 || room->type_of_room == START)
     {
@@ -167,26 +215,17 @@ void    resolution(t_param *p)
             room->index = 0;
     }
     ft_path(room, 1);
-    while (p->nbr_fourmi < id)
-    {
-        while (room->tube)
-        {
-            room->next->id = id;
-            room->tube->n = ft_generation(room, 0);
-            //ft_calcul(*dist);
-            ft_putchar('\n');
-            // si le path est valide
-            room->tube = room->tube->tube_next;
-        }
-    }
+    //ft_putendl("");
+    //ft_putendl("On passe a la fin");
     ft_display_room(room);
-
-    //on commence a la fourmi la plus avancé
-
-//    path_fourmi = crea_path_fourmi(room);
-//    while (i <= nbr_fourmi)//
-//    {
-//        path_fourmi[i] = path_fourmi[i]->next;
-//        ft_aff(path_fourmi[i]->next);
-//    }
+    while (target->nbr_fourmi != id)
+    {
+        while (p->nbr_fourmi >= id)
+        {
+            if ((ft_start(room, id, p->nbr_fourmi)))
+                break ;
+            id++;
+        }
+        ft_generation(room); //va update le PA et faire avancer les fourmis
+    }
 }
