@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:17:41 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/27 02:07:06 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/27 20:07:44 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,17 @@ void        ft_path(t_room *room, int index)
     }
 }
 
-t_tube  *ft_calcul(t_tube *tube)
+t_tube  *ft_calcul(t_tube *tube, int index)
 {
     int a;
     t_tube *adress;
 
     a = tube->n;
     adress = NULL;
-    ft_putendl("calcul FCT");
     while (tube)
     {
-        if (a > tube->n && (tube->next->path == 1 || tube->next->type_of_room == END) && !tube->next->nbr_fourmi)
+        if (a > tube->n && (tube->next->path == 1 || tube->next->type_of_room == END))
         {
-            ft_putendl("calkj");
-            ft_putstr(tube->next->name);
-            ft_putnbr(tube->next->nbr_fourmi);
             a = tube->n;
             adress = tube;
         }
@@ -117,8 +113,6 @@ void  ft_noeud_init(t_room *room)
         tube = tube->tube_next;
     }
 }
-
-int    ft_distance(t_room *room); //retourne la distance avec le PA
 
 int  ft_start(t_room *room, int id, int fourmi_rest)
 {
@@ -153,37 +147,28 @@ int  ft_start(t_room *room, int id, int fourmi_rest)
     return (0);
 }
 
-//
-// int    ft_generation(t_room *room, int n)
-// {
-//     t_tube *tmp;
-//
-//     ft_putnbr(n);
-//     ft_putstr("\t");
-//     ft_putstr(room->name);
-//     ft_noeud_init(room);
-//     if (room->type_of_room == END)
-//             return (n);
-//     if (room->nbr_fourmi == 1)
-//         n = n + 1;
-//     tmp = room->tube;
-//     while (tmp)
-//     {
-//         if (tmp->next->index >= room->index)
-//             n = ft_generation(tmp->next, n + 1);
-//         tmp->n = n;
-//         tmp = tmp->tube_next;
-//     }
-//     if ((tmp = ft_calcul(room->tube)) && room->nbr_fourmi == 1)
-//     {
-//         ft_aff(room->id, room->tube->next->name);
-//         tmp->next->id = room->id;
-//         room->id = 0; // SECURITE
-//         room->nbr_fourmi = 0;
-//         tmp->next->nbr_fourmi++;
-//     }
-//     return (n);
-// }
+int    ft_distance(t_room *room, int n)
+{
+    t_tube *tmp;
+
+    if (room->type_of_room == END)
+            return (n);
+    ft_noeud_init(room);
+    tmp = room->tube;
+    while (tmp)
+    {
+        if (tmp->next->index >= room->index)
+            n = ft_distance(tmp->next, n + 1);
+        if (tmp->next->pa != -1)
+            tmp->n = n + tmp->next->pa;
+        else
+            tmp->n = n;
+        tmp = tmp->tube_next;
+    }
+    if ((tmp = ft_calcul(room->tube)))
+        n = tmp->n;
+    return (n);
+}
 
 void    resolution(t_param *p)
 {
