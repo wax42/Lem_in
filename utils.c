@@ -32,10 +32,10 @@ void		ft_display_room(t_room *room)
 		ft_putstr("\tINDEX  ");
 		ft_putnbr(room->index);
 		ft_putchar('\t');
-		ft_putstr("\tPA  ");
-		ft_putnbr(room->pa);
-		ft_putchar('\t');
 		ft_display_tube(room->tube);
+		ft_putchar('\n');
+		ft_putstr("ID\t");
+		ft_putnbr(room->nbr_fourmi);
 		ft_putendl("");
 		room = room->next;
 	}
@@ -65,6 +65,5 @@ t_tube		*ft_add_tube(t_tube *head, t_room *target)
 
 	tmp = ft_new_tube(target);
 	tmp->tube_next = head;
-	tmp->n = 0;
 	return (tmp);
 }

@@ -110,6 +110,7 @@ int	main(void)
 		ft_strdel(&tmp);
 	}
 	p.nbr_fourmi = ft_atoi(line);
+	ft_putnbr(p.nbr_fourmi);
 	ft_strdel(&line);
 	if (!p.nbr_fourmi)
 		ft_exit(0);

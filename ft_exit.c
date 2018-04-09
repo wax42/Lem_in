@@ -12,7 +12,6 @@
 
 #include "./includes/lem_in.h"
 
-
 void  	ft_exit(int keycode)
 {
 	if (keycode == 0)

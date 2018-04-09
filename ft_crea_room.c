@@ -57,7 +57,7 @@ t_room	*ft_crea_room(t_param *p, int keycode, char *name)
 	new_room->next = NULL;
 	new_room->path = 0;
 	new_room->index = -1;
+	new_room->nbr_fourmi = 0;	
 	new_room->tube = NULL;
-	new_room->pa = 0;
 	return (new_room);
 }

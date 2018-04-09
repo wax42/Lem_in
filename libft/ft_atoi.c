@@ -40,8 +40,6 @@ int				ft_atoi(const char *str)
 		i++;
 	}
 	if (neg == 1)
-	{
 		nb = -nb;
-	}
 	return (nb);
 }

@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:17:41 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/27 20:07:44 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/02/27 19:20:25 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void        ft_path(t_room *room, int index)
     tmp = room->tube;
     while (tmp)
     {
-        if (tmp->next->path > 0 || tmp->next->type_of_room == START) ///essaye avec == 1
+        if (tmp->next->path == 1 || tmp->next->type_of_room == START) ///essaye avec == 1
         {
             if (tmp->next->index > index || tmp->next->index == -1)
             {
@@ -73,25 +73,6 @@ void        ft_path(t_room *room, int index)
     }
 }
 
-t_tube  *ft_calcul(t_tube *tube, int index)
-{
-    int a;
-    t_tube *adress;
-
-    a = tube->n;
-    adress = NULL;
-    while (tube)
-    {
-        if (a > tube->n && (tube->next->path == 1 || tube->next->type_of_room == END))
-        {
-            a = tube->n;
-            adress = tube;
-        }
-        tube = tube->tube_next;
-    }
-    return (adress);
-}
-
 void   ft_aff(int id, char *name)
 {
     ft_putchar('L');
@@ -101,81 +82,71 @@ void   ft_aff(int id, char *name)
     ft_putchar(' ');
 }
 
-void  ft_noeud_init(t_room *room)
+int  ft_deplace(t_room *room, int id)
 {
     t_tube *tube;
-
-    tube = room->tube;
-    while (tube)
-    {
-        if (room->index > tube->next->index && tube->next->index != -1 && tube->next->nbr_fourmi)
-            room->pa++;
-        tube = tube->tube_next;
-    }
-}
-
-int  ft_start(t_room *room, int id, int fourmi_rest)
-{
-    t_tube *tube;
-    int tmp_dist;
-    int old_dist;
     t_room *tmp;
 
     tube = room->tube;
-    tmp = room->tube->next;
-    tmp_dist = ft_distance(tmp);
-    while (tube->next)
+    tmp = room;
+    // ft_putstr(room->name);
+    // ft_putstr("oui ");
+    while (tube)
     {
-        if (room->index <= tube->next->index && !tube->next->nbr_fourmi)
+        // ft_putstr("o");
+        if (room->index <= tube->next->index && (tube->next->nbr_fourmi == 0 || tube->next->type_of_room == END))
         {
-            old_dist = tmp_dist;
-            if ((tmp_dist = ft_distance(tube->next)) < old_dist)
-                tmp = tube->next;
+          ft_aff(id, tube->next->name);
+          room->nbr_fourmi = 0;
+          if (tube->next->type_of_room == END)
+            return (1);
+          else
+            tube->next->nbr_fourmi = id;
+          return (0);
         }
         tube = tube->tube_next;
     }
-    if (fourmi_rest - tmp_dist > 0)
-    {
-        ft_aff(id, tmp->name);
-        tmp->id = id;
-        tmp->nbr_fourmi++;
-        //room->id = 0; // SECURITE
-        //room->nbr_fourmi = 0;
-    }
-    else
-        return (1);
-    return (0);
+    return (-1);
 }
 
-int    ft_distance(t_room *room, int n)
+t_room    *ft_envoi_room(t_room *room, int id)
 {
-    t_tube *tmp;
+  t_room   *tmp;
 
-    if (room->type_of_room == END)
-            return (n);
-    ft_noeud_init(room);
-    tmp = room->tube;
-    while (tmp)
-    {
-        if (tmp->next->index >= room->index)
-            n = ft_distance(tmp->next, n + 1);
-        if (tmp->next->pa != -1)
-            tmp->n = n + tmp->next->pa;
-        else
-            tmp->n = n;
-        tmp = tmp->tube_next;
-    }
-    if ((tmp = ft_calcul(room->tube)))
-        n = tmp->n;
-    return (n);
+  tmp = room;
+  while (tmp)
+  {
+    if (tmp->type_of_room != END && tmp->type_of_room != START && tmp->nbr_fourmi == id)
+        return (tmp);
+    tmp = tmp->next;
+  }
+  return (NULL);
+}
+
+t_room    *ft_find_start(t_room *room)
+{
+  t_room   *tmp;
+
+  tmp = room;
+  while (tmp)
+  {
+    if (tmp->type_of_room == START)
+        return (tmp);
+    tmp = tmp->next;
+  }
+  return (NULL);
 }
 
 void    resolution(t_param *p)
 {
+    t_room   *tmp;
     t_room   *room;
     t_room   *target;
-    // t_tube   *tmp;
-    int id = 1;
+    int id;
+    int decal;
+    int ret;
+
+    decal = 0;
 
     room = p->head->next;
     target = room;
@@ -191,26 +162,54 @@ void    resolution(t_param *p)
             break ;
         target = target->next;
     }
-    //ft_putendl(room->name);
-    //ft_putnbr(room->nbr_fourmi);
     secur_path(room, room->name);
+    ft_path(room, 1);
+
     if (room->path > 0 || room->type_of_room == START)
     {
         if (room->index > 0 || room->index == -1)
             room->index = 0;
     }
-    ft_path(room, 1);
-    //ft_putendl("");
-    //ft_putendl("On passe a la fin");
     ft_display_room(room);
-    while (target->nbr_fourmi != id)
+    while (target->nbr_fourmi != p->nbr_fourmi)
     {
+        id = target->nbr_fourmi + 1;   //generation
+        sleep(2);
+        // ft_putstr("generation \n");
         while (p->nbr_fourmi >= id)
         {
-            if ((ft_start(room, id, p->nbr_fourmi)))
-                break ;
+          // ft_putnbr(id);
+            if ((tmp = ft_envoi_room(p->head->next, id)))
+            {
+              ret = ft_deplace(tmp, id);
+              if (ret != -1)
+                target->nbr_fourmi += ret;
+            }
             id++;
         }
-        ft_generation(room); //va update le PA et faire avancer les fourmis
+        // ft_putstr("START \n");
+        // ft_putnbr(decal);
+        // ft_putstr("NBR_FOURMI \n");
+        // ft_putnbr(p->nbr_fourmi);
+        id = decal + 1; //lancer de start
+        tmp = ft_find_start(p->head->next);
+        ft_putnbr(p->nbr_fourmi);
+        while (p->nbr_fourmi >= id)
+        {
+            // ft_putstr(" \n TEST \n");
+            // ft_putnbr(id);
+            ret = ft_deplace(tmp, id);
+            if (ret != -1)
+            {
+              target->nbr_fourmi += ret;
+              decal += 1;
+            }
+            // ft_putstr("fils de pute");
+            id++;
+        }
+        if (target->nbr_fourmi < p->nbr_fourmi)
+          ft_putchar('\n');
+        // ft_display_room(room);
     }
+    sleep(2);
 }

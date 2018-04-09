@@ -18,7 +18,6 @@
 
 typedef struct s_tube
 {
-	int			  n;
 	struct s_room *next;
 	struct s_tube *tube_next;
 }				t_tube;
@@ -26,10 +25,8 @@ typedef struct s_tube
 
 typedef struct s_room
 {
-	int			id;
 	int 		path;
 	int 		type_of_room;
-	int 		pa;
 	char 		*name;
 	int 		nbr_fourmi;
 	int 		index;
