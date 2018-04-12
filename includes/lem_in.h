@@ -15,6 +15,9 @@
 # include "../libft/libft.h"
 # define START 1
 # define END 2
+#define NOEUD 2
+#define FALSE -1
+#define TRUE 1
 
 typedef struct s_tube
 {
@@ -48,7 +51,17 @@ typedef struct s_lines
 	struct s_lines *next;
 }				t_lines;
 
-void         ft_display_lines(t_lines *header);
+void	ft_path(t_room *room, int index);
+
+int  	ft_deplace(t_room *room, int id, int *state);
+
+int		secur_path(t_room *room);
+
+void	ft_display_lines(t_lines *header);
+
+void	ft_tube_link(t_room *room, t_room *target);
+
+void	ft_room_link(char *name, t_room *room, t_param *p, int keycode);
 
 void    resolution(t_param *p, t_lines *header);
 

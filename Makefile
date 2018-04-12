@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 HEAD = ./includes/lem_in.h
 
 SRC =  ft_crea_room.c main.c ft_check_htag.c ft_crea_tube.c utils.c resolution.c\
-	   parse.c
+	   parse.c ft_deplace.c
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))
 

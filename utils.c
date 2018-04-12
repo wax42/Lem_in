@@ -12,12 +12,12 @@
 
 #include "includes/lem_in.h"
 
-void         ft_display_lines(t_lines *header)
+void		ft_display_lines(t_lines *header)
 {
 	t_lines *tmp;
 
 	tmp = header;
-	while(tmp)
+	while (tmp)
 	{
 		ft_putendl(tmp->line);
 		tmp = tmp->next;
@@ -69,13 +69,4 @@ t_tube		*ft_new_tube(t_room *room)
 	new = (t_tube*)malloc(sizeof(t_tube));
 	new->next = room;
 	return (new);
-}
-
-t_tube		*ft_add_tube(t_tube *head, t_room *target)
-{
-	t_tube	*tmp;
-
-	tmp = ft_new_tube(target);
-	tmp->tube_next = head;
-	return (tmp);
 }
