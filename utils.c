@@ -6,11 +6,23 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 08:51:29 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/02/27 01:05:04 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/04/11 00:01:00 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lem_in.h"
+
+void         ft_display_lines(t_lines *header)
+{
+	t_lines *tmp;
+
+	tmp = header;
+	while(tmp)
+	{
+		ft_putendl(tmp->line);
+		tmp = tmp->next;
+	}
+}
 
 void		ft_display_tube(t_tube *tube)
 {

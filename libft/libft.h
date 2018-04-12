@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:28:46 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/07 23:15:25 by vguerand         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:49:14 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,7 @@ void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 
 void			ft_putnbr_fd(int n, int fd);
+
+int				get_first_line(const int fd, char **line);
 
 #endif

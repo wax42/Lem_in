@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 00:11:22 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/27 01:03:50 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/04/11 01:59:12 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ t_room	*ft_crea_room(t_param *p, int keycode, char *name)
 	else if (keycode == START)
 		new_room->nbr_fourmi = p->nbr_fourmi;
 	new_room->type_of_room = keycode;
-	new_room->name = ft_strdup(name);
+	new_room->name = name;
 	new_room->next = NULL;
 	new_room->path = 0;
 	new_room->index = -1;
-	new_room->nbr_fourmi = 0;	
+	new_room->nbr_fourmi = 0;
 	new_room->tube = NULL;
 	return (new_room);
 }

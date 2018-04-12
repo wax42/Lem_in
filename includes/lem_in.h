@@ -6,7 +6,7 @@
 /*   By: vguerand <vguerand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 23:12:26 by vguerand          #+#    #+#             */
-/*   Updated: 2018/02/27 01:40:33 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/04/11 00:01:05 by mbarthe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,19 @@ typedef struct s_param
 	int 	nbr_fourmi;
 }				t_param;
 
-void    resolution(t_param *p);
+typedef struct s_lines
+{
+	char *line;
+	struct s_lines *next;
+}				t_lines;
+
+void         ft_display_lines(t_lines *header);
+
+void    resolution(t_param *p, t_lines *header);
 
 void  	ft_exit(int keycode);
+
+t_lines    *ft_ant_nbr(t_param *p, t_lines *tmp);
 
 void		ft_display_tube(t_tube *tube);
 
