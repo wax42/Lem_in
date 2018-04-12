@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in
+NAME = lem-in
 PATH_SRC = ./
 PATH_INC = ./libft/includes/ -I ./includes/
 
