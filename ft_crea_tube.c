@@ -30,7 +30,7 @@ int			ft_check_t(char *str)
 	return (count == 1) ? 1 : 0;
 }
 
-int		ft_check_tube(char *str, char **room1, char **room2)
+int			ft_check_tube(char *str, char **room1, char **room2)
 {
 	int i;
 
@@ -80,7 +80,7 @@ t_room		*ft_crea_tube(char *str, t_room *room, t_room **target)
 	room_1 = ft_get_room(room1, room);
 	room_2 = ft_get_room(room2, room);
 	if (!room_1 || !room_2)
-		ft_exit (0);
+		ft_exit(0);
 	if (!ft_strcmp(room1, room2))
 		return (NULL);
 	*target = room_2;

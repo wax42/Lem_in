@@ -50,12 +50,8 @@ void	ft_tube_link(t_room *room, t_room *target)
 	}
 }
 
-void	ft_room_link(char *line, t_room *room, int sub, t_param *p, int keycode)
+void	ft_room_link(char *name, t_room *room, t_param *p, int keycode)
 {
-	char	*name;
-
-	//ft_putendl(line);
-	name = ft_strsub(line, 0, sub);
 	while (room->next)
 	{
 		if (ft_strequ(name, room->name))
@@ -71,6 +67,7 @@ t_room	*ft_check(t_lines **tmp, t_param *p, t_room *head)
 	int		sub;
 	t_room	*room;
 	t_room	*target;
+	char	*name;
 
 	room = head;
 	while ((keycode = ft_check_htag((*tmp)->line)) > 0)
@@ -85,9 +82,14 @@ t_room	*ft_check(t_lines **tmp, t_param *p, t_room *head)
 		(*tmp) = (*tmp)->next;
 	}
 	if ((sub = ft_parse_room((*tmp)->line)))
-		ft_room_link((*tmp)->line, room, sub, p, keycode);
+	{
+		name = ft_strsub((*tmp)->line, 0, sub);
+		ft_room_link(name, room, p, keycode);
+	}
 	else if ((room = ft_crea_tube((*tmp)->line, head, &target)))
 		ft_tube_link(room, target);
+	else if (keycode == 1 || keycode == 2)
+		ft_exit(0);
 	else
 		return (NULL);
 	return (head);

@@ -35,10 +35,9 @@ int		ft_parse_room(char *line)
 	while (line[i] == ' ')
 		i++;
 	tmp = i;
-	while ((ft_isdigit(line[i])))
-		i++;
-	if (tmp == i)
-		return (0);
+	while ((ft_isdigit(line[i++])))
+		if (tmp == i)
+			return (0);
 	return ((sub > 0) ? sub : -1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbarthe <mbarthe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 20:50:41 by mbarthe           #+#    #+#             */
-/*   Updated: 2018/04/10 19:56:18 by mbarthe          ###   ########.fr       */
+/*   Updated: 2018/04/12 14:11:01 by vguerand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		ft_get_line(char **str, char **line)
 	return (0);
 }
 
-int		get_first_line(const int fd, char **line)
+int				get_first_line(const int fd, char **line)
 {
 	static char	*str;
 	char		buf[2];
